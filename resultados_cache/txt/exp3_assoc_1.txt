@@ -1,0 +1,38 @@
+=======================================================
+           SIMULADOR DE MEMORIA CACHE                  
+=======================================================
+
+--- Parametros de Entrada ---
+Arquivo de entrada              : oficial.cache
+Politica de escrita             : write-back (1)
+Tamanho da linha                : 128 bytes
+Numero de linhas                : 64
+Associatividade                 : 1 linhas por conjunto
+Numero de conjuntos             : 64
+Tamanho total da cache          : 8192 bytes
+Hit time                        : 4.0000 ns
+Politica de substituicao        : LRU
+Tempo de leitura da MP          : 60.0000 ns
+Tempo de escrita da MP          : 60.0000 ns
+
+--- Totais do Arquivo de Entrada ---
+Total de enderecos              : 51200
+Total de leituras               : 45056
+Total de escritas               : 6144
+
+--- Acessos a Memoria Principal ---
+Leituras na MP                  : 12822
+Escritas na MP                  : 2048
+Total de acessos na MP          : 14870
+
+--- Taxa de Acerto ---
+Leitura                         : 76.0875% (34282 acertos / 45056 leituras)
+Escrita                         : 66.6667% (4096 acertos / 6144 escritas)
+Global                          : 74.9570% (38378 acertos / 51200 acessos)
+Total de falhas                 : 12822
+
+--- Tempo Medio de Acesso ---
+Tempo medio de acesso (AMAT)    : 19.0258 ns
+Tempo medio efetivo com trafego : 21.4258 ns
+
+=======================================================
