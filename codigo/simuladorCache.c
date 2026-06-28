@@ -1,14 +1,24 @@
 /*
  * Simulador de memoria cache associativa por conjunto.
  *
- * Características do Projeto:
+ * O programa simula uma cache configuravel a partir de um arquivo de entrada
+ * contendo enderecos hexadecimais de 32 bits e operacoes R/W.
  *
  * Formatos de uso aceitos:
- *   1) Um unico tempo para memoria principal:
- *      ./simula_cache 0 128 64 4 4 LRU 60 oficial.cache
  *
- *   2) Tempo de leitura e escrita separados para memoria principal:
- *      ./simula_cache 0 128 64 4 4 LRU 60 60 oficial.cache
+ * 1) Um unico tempo para memoria principal:
+ *    Windows:
+ *      simuladorCache.exe 0 128 64 4 4 LRU 60 oficial.cache
+ *
+ *    Linux:
+ *      ./simuladorCache 0 128 64 4 4 LRU 60 oficial.cache
+ *
+ * 2) Tempo de leitura e escrita separados para memoria principal:
+ *    Windows:
+ *      simuladorCache.exe 0 128 64 4 4 LRU 60 60 oficial.cache
+ *
+ *    Linux:
+ *      ./simuladorCache 0 128 64 4 4 LRU 60 60 oficial.cache
  *
  * Parametros:
  *   politica_escrita : 0 = write-through, 1 = write-back
@@ -16,10 +26,16 @@
  *   num_linhas       : numero total de linhas da cache, potencia de 2
  *   associatividade  : numero de linhas por conjunto, potencia de 2
  *   hit_time         : tempo de acesso em caso de acerto, em ns
- *   politica_subst   : LRU ou ALEATORIA
+ *   politica_subst   : LRU, ALEATORIA ou RANDOM
  *   tempo_leitura_mp : tempo de leitura da memoria principal, em ns
  *   tempo_escrita_mp : tempo de escrita da memoria principal, em ns
  *   arquivo.cache    : arquivo de entrada com endereco hexadecimal e operacao R/W
+ *
+ * Exemplo a partir da raiz do projeto no Windows:
+ *   .\codigo\simuladorCache.exe 0 128 64 4 4 LRU 60 .\entradas\oficial.cache
+ *
+ * Exemplo a partir da raiz do projeto no Linux:
+ *   ./codigo/simuladorCache 0 128 64 4 4 LRU 60 ./entradas/oficial.cache
  */
 
 #include <stdio.h>
@@ -344,17 +360,6 @@ static void imprimir_saida(const Config *cfg, const Estatisticas *est) {
 
     // AMAT convencional: hit_time + miss_rate * penalidade_de_miss.
     double tempo_medio_amat = cfg->hit_time + ((miss_rate_global / 100.0) * cfg->tempo_leitura_mp);
-
-    // Valor adicional util para analisar trafego real gerado na MP.
-    double tempo_total_efetivo =
-        ((double)est->total_acessos * cfg->hit_time) +
-        ((double)est->leituras_mp * cfg->tempo_leitura_mp) +
-        ((double)est->escritas_mp * cfg->tempo_escrita_mp);
-
-    double tempo_medio_efetivo = 0.0;
-    if (est->total_acessos > 0) {
-        tempo_medio_efetivo = tempo_total_efetivo / (double)est->total_acessos;
-    }
 
     printf("=======================================================\n");
     printf("           SIMULADOR DE MEMORIA CACHE                  \n");

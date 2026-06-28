@@ -3,7 +3,7 @@
 =======================================================
 
 --- Parametros de Entrada ---
-Arquivo de entrada              : oficial.cache
+Arquivo de entrada              : .\entradas\oficial.cache
 Politica de escrita             : write-through (0)
 Tamanho da linha                : 512 bytes
 Numero de linhas                : 16
@@ -33,6 +33,4 @@ Total de falhas                 : 16389
 
 --- Tempo Medio de Acesso ---
 Tempo medio de acesso (AMAT)    : 23.2059 ns
-Tempo medio efetivo com trafego : 23.2059 ns
-
 =======================================================
